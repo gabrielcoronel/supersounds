@@ -1,12 +1,22 @@
-import { useNavigate, Outlet } from "@reach/router";
+import { useNavigate } from "@reach/router";
+import { Button } from "@mui/material";
+
+const styles = {
+    menu: {
+        width: "100%",
+        display: "flex",
+        justifyContent: "space-evenly",
+        alignItems: "center"
+    }
+};
 
 const MenuLink = ({ text, url }) => {
     const navigate = useNavigate();
 
     return (
-        <button onClick={async () => await navigate(url)}>
+        <Button onClick={async () => await navigate(url)} variant="text">
             {text}
-        </button>
+        </Button>
     );
 };
 
@@ -20,7 +30,7 @@ const Menu = () => {
         .map(([text, url], index) => <MenuLink key={index} text={text} url={url}/>);
 
     return (
-        <nav>
+        <nav style={styles.menu}>
             {linksElements}
         </nav>
     );

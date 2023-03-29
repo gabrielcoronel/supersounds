@@ -10,6 +10,9 @@ import EditTrack from './pages/EditTrack';
 import NotFound from './pages/NotFound';
 import { queryClient } from './queryClient';
 
+import '@fontsource/roboto/400.css';
+import './global.css';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(

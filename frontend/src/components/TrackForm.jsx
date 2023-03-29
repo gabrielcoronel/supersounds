@@ -1,8 +1,21 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
+import { TextField, Button } from '@mui/material';
 
 import CategoriesField from '../components/CategoriesField';
 import FileInput from '../components/FileInput';
+
+const styles = {
+    form: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        width: "fit-content",
+        gap: "2rem",
+        margin: "auto"
+    }
+};
 
 export default ({ submitText, onSubmit, initialData }) => {
     const [formState, setFormState] = useState(initialData);
@@ -33,35 +46,24 @@ export default ({ submitText, onSubmit, initialData }) => {
     }
 
     return (
-        <div>
-            <label>
-                Título
+        <div style={styles.form}>
+            <TextField
+                label="Título"
+                variant="standard"
+                value={formState.title}
+                onChange={(event) => updateTitle(event.target.value)}
+            />
 
-                <input
-                    type="text"
-                    value={formState.title}
-                    onChange={(event) => updateTitle(event.target.value)}
-                />
-            </label>
+            <CategoriesField
+                categories={formState.categories}
+                setCategories={updateCategories}
+            />
 
-            <label>
-                Categorías
+            <FileInput onInput={handleFileInput} />
 
-                <CategoriesField
-                    categories={formState.categories}
-                    setCategories={updateCategories}
-                />
-            </label>
-
-            <label>
-                Archivo
-
-                <FileInput onInput={handleFileInput} />
-            </label>
-
-            <button onClick={(_) => mutation.mutate(formState)}>
+            <Button onClick={(_) => mutation.mutate(formState)} variant="contained">
                 {submitText}
-            </button>
+            </Button>
         </div>
     );
 };

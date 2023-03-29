@@ -1,5 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAdd } from '@fortawesome/free-solid-svg-icons'
+import { TextField, Button } from '@mui/material';
+
+const styles = {
+    container: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        gap: "1rem"
+    }
+};
 
 export default ({ categories, setCategories }) => {
     const addCategory = () => {
@@ -16,21 +27,21 @@ export default ({ categories, setCategories }) => {
     const categoriesElements = categories
         .map((category, index) => {
             return (
-                <input
+                <TextField
+                    variant='standard'
                     key={index}
                     onChange={(event) => editCategory(index, event.target.value)}
-                    type="text"
                     value={category}
                 />
             );
         });
 
     return (
-        <div>
+        <div style={styles.container}>
             {categoriesElements}
-            <button onClick={(_) => addCategory()}>
+            <Button onClick={(_) => addCategory()} variant="contained">
                 <FontAwesomeIcon icon={faAdd} />
-            </button>
+            </Button>
         </div>
     );
 };

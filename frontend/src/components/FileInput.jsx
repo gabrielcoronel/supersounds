@@ -1,14 +1,7 @@
 import { useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileAudio } from '@fortawesome/free-solid-svg-icons'
-
-const styles = {
-    fileInput: {
-        display: 'none'
-    },
-    button: {
-    }
-};
+import { Button } from '@mui/material';
 
 export default ({ onInput }) => {
     const inputReference = useRef(null);
@@ -23,15 +16,12 @@ export default ({ onInput }) => {
                 ref={inputReference}
                 type='file'
                 onChange={onInput}
-                style={styles.fileInput}
+                style={{ display: 'none' }}
             />
 
-            <button
-                onClick={handleClick}
-                style={styles.button}
-            >
+            <Button onClick={handleClick} variant="contained" >
                 <FontAwesomeIcon icon={faFileAudio} />
-            </button> 
+            </Button> 
         </>
     );
 };

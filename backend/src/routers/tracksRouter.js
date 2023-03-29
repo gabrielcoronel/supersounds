@@ -19,7 +19,7 @@ const uploader = multer({ dest: "./tracks" });
 router.post("/Tracks.add", uploader.single("audio"), (req, res) => {
     const track = req.body;
     const audioFileName = req.file.filename;
-    const audioUri = `http://localhost:8080/user-content/${audioFileName}`;
+    const audioUri = `http://localhost:8080/tracks/${audioFileName}`;
 
     trackService
         .add({ ...track, audioUri })
@@ -78,7 +78,7 @@ router.post("/Tracks.updateOne", uploader.single("audio"), (req, res) => {
     // Si se envía un archivo, se inserta en la base de datos
     if (req.file !== undefined) {
         updatedTrack.audioUri
-            = `http://localhost:8080/user-content/${req.file.filename}`;
+            = `http://localhost:8080/tracks/${req.file.filename}`;
     }
 
     trackService

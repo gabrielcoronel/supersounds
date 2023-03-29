@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 
 import * as trackService from "../services/tracksService";
 import TrackForm from "../components/TrackForm";
+import Heading from '../components/Heading';
 
 export default () => {
     const params = useParams();
@@ -25,10 +26,14 @@ export default () => {
     console.log(data);
 
     return (
-        <TrackForm
-            submitText="Guardar cambios"
-            onSubmit={(track) => trackService.updateOne(id, track)}
-            initialData={data}
-        />
+        <>
+            <Heading text="Edita una pista" />
+
+            <TrackForm
+                submitText="Guardar cambios"
+                onSubmit={(track) => trackService.updateOne(id, track)}
+                initialData={data}
+            />
+        </>
     );
 };
