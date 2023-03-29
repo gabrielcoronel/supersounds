@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import CategoriesField from './components/CategoriesField';
-import { useState } from 'react';
+import { QueryClientProvider } from 'react-query';
+import { Router } from '@reach/router';
+
+import AllTracks from './pages/AllTracks';
+import { queryClient } from './queryClient';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const Test = () => {
-  const [categories, setCategories] = useState([]);
-
-  return <CategoriesField categories={categories} setCategories={setCategories} />;
-};
 root.render(
-  <React.StrictMode>
-    <Test />
-  </React.StrictMode>
+    <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <Router>
+      <AllTracks />
+    </Router>
+  </QueryClientProvider>
+    </React.StrictMode>
 );

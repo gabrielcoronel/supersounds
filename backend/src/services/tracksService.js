@@ -68,7 +68,7 @@ const update = async (id, track) => {
 };
 
 // Elimina a la pista con el id @id
-const remove = async (id) => {
+const removeOne = async (id) => {
     await trackModel.deleteOne({ _id: id });
 };
 
@@ -78,5 +78,5 @@ module.exports = {
     getById,
     filter,
     update,
-    remove
+    removeOne
 };

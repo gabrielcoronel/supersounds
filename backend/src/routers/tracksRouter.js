@@ -16,7 +16,7 @@ const router = express.Router();
 const uploader = multer({ dest: "./tracks" });
 
 // Ruta post que crea una nueva pista
-router.post("/Tracks.add", uploader.single("audioFile"), (req, res) => {
+router.post("/Tracks.add", uploader.single("audio"), (req, res) => {
     const track = req.body;
     const audioFileName = req.file.filename;
     const audioUri = `http://localhost:8080/user-content/${audioFileName}`;
@@ -48,7 +48,7 @@ router.post("/Tracks.filter", (req, res) => {
 // el parámetro de la ruta. Lanza el error 404
 // si no se encuentra
 router.post("/Tracks.getById", (req, res) =>  {
-    const id = req.params.id;
+    const id = req.body.id;
 
     trackService
         .getById(id)
@@ -67,7 +67,7 @@ router.post("/Tracks.getAll", (_, res) => {
 // Actualiza a la pista con con id dado por el parámetro
 // de la ruta con las datos dados
 router.post("/Track.update", uploader.single("audioFile"), (req, res) => {
-    const id = req.params.id;
+    const id = req.body.id;
     const track = req.body;
 
     const updatedTrack = { ...track };
@@ -85,11 +85,11 @@ router.post("/Track.update", uploader.single("audioFile"), (req, res) => {
 
 // Elimina a la pista con el id del parámetro de la ruta
 // en el repositorio
-router.post("/Track.remove", (req, res) => {
-    const id = req.params.id;
+router.post("/Tracks.removeOne", (req, res) => {
+    const id = req.body.id;
 
     trackService
-        .remove(id)
+        .removeOne(id)
         .catch((error) => res.status(400).send(error));
 });
 
