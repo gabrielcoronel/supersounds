@@ -66,8 +66,11 @@ router.post("/Tracks.getAll", (_, res) => {
 
 // Actualiza a la pista con con id dado por el parámetro
 // de la ruta con las datos dados
-router.post("/Track.update", uploader.single("audioFile"), (req, res) => {
+router.post("/Tracks.updateOne", uploader.single("audio"), (req, res) => {
     const id = req.body.id;
+
+    delete req.body.id;
+
     const track = req.body;
 
     const updatedTrack = { ...track };

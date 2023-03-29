@@ -20,16 +20,31 @@ export const filter = async (title, categories) => {
     return data;
 };
 
-export const getAll = () => {
-    const url = formatApiUrl("/Tracks.getAll");
-    const promise = axios.post(url);
+export const getById = async (id) => {
+    const url = formatApiUrl("/Tracks.getById");
+    const response = await axios.post(url, { id });
+    const data = response.data;
 
-    return promise;
+    return data;
 };
+
+// export const getAll = () => {
+//     const url = formatApiUrl("/Tracks.getAll");
+//     const promise = axios.post(url);
+
+//     return promise;
+// };
 
 export const removeOne = (id) => {
     const url = formatApiUrl("/Tracks.removeOne");
     const promise = axios.post(url, { id });
+
+    return promise;
+};
+
+export const updateOne = (id, track) => {
+    const url = formatApiUrl("/Tracks.updateOne");
+    const promise = axios.post(url, { id, ...track });
 
     return promise;
 };

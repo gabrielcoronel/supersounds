@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
+import { useNavigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPencil } from '@fortawesome/free-solid-svg-icons';
 
@@ -55,6 +56,7 @@ const TrackTile = ({ track }) => {
     const id = track._id;
 
     const mutation = useMutation((id) => trackService.removeOne(id));
+    const navigate = useNavigate();
 
     const categoriesElements = categories
         .map((category, index) => <CategoryChip key={index} category={category} />);
@@ -81,7 +83,7 @@ const TrackTile = ({ track }) => {
                         <FontAwesomeIcon icon={faTrash} />
                     </button>
 
-                    <button>
+                    <button onClick={async () => await navigate(`/edit/${id}`)}>
                         <FontAwesomeIcon icon={faPencil} />
                     </button>
                 </div>
